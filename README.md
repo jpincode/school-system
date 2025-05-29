@@ -24,8 +24,12 @@ src/
     │   ├── DisciplineController.java # Controlador de Disciplinas
     │   └── StudentController.java    # Controlador de Alunos
     └── views/
+        ├── DeleteView.java          # Interface de exclusão
+        ├── ListView.java            # Interface de listagem
         ├── Main.java                # Ponto de entrada da aplicação
-        └── MenuView.java            # Interface do usuário
+        ├── MenuView.java            # Menu principal
+        ├── RegisterView.java        # Interface de cadastro
+        └── UpdateView.java          # Interface de atualização
 ```
 
 ## 🚀 Funcionalidades
@@ -41,11 +45,14 @@ src/
 - Atualizar dados da disciplina
 - Remover disciplina
 - Listar todas as disciplinas
+- Matricular aluno em disciplina
+- Desmatricular aluno de disciplina
 
 ## 🛠️ Tecnologias Utilizadas
 - Java 17
 - Padrão MVC
 - Programação Orientada a Objetos
+- Singleton Pattern (StudentRepository)
 
 ## ⚙️ Como Executar
 
@@ -76,16 +83,21 @@ java presentations.views.Main
 
 ### Menu Principal
 O sistema apresenta as seguintes opções:
-1. Registrar Disciplina
-2. Registrar Aluno
-3. Matricular Aluno em Disciplina
-4. Deletar Disciplina
-5. Deletar Aluno
+1. Cadastrar Disciplina
+2. Cadastrar Aluno
+3. Matricular Aluno na Disciplina
+4. Excluir Disciplina
+5. Excluir Aluno
 6. Desmatricular Aluno da Disciplina
 7. Atualizar Disciplina
 8. Atualizar Aluno
 9. Listar
 0. Sair
+
+### Menu de Listagem
+1. Listar Disciplinas
+2. Listar Alunos
+0. Voltar ao Menu Principal
 
 ### Operações Principais
 
@@ -98,7 +110,7 @@ O sistema apresenta as seguintes opções:
 
 #### Cadastro de Disciplina
 - Informações necessárias:
-  - Nome (único)
+  - Nome
   - Código (único)
   - Carga horária
 
@@ -106,11 +118,12 @@ O sistema apresenta as seguintes opções:
 
 ### Camadas do Sistema
 1. **Apresentação** (`presentations/`)
-   - Views: Interface com usuário
+   - Views: Interface com usuário dividida em múltiplas views especializadas
    - Controllers: Validação de entrada e direcionamento
 
 2. **Negócio** (`business/`)
    - Services: Regras de negócio e lógica da aplicação
+   - IOService: Gerenciamento de entrada/saída
 
 3. **Modelo** (`models/`)
    - Entities: Classes de domínio
@@ -120,19 +133,23 @@ O sistema apresenta as seguintes opções:
 
 ### MVC (Model-View-Controller)
 - **Model**: Entidades e repositórios
-- **View**: Classes em `presentations/views`
+- **View**: Classes especializadas em `presentations/views`
 - **Controller**: Classes em `presentations/controllers`
 
 ### Repository Pattern
 - Abstração da persistência de dados
 - Implementado em `models/repositories`
+- StudentRepository implementa Singleton Pattern
+
+### Singleton Pattern
+- Implementado no StudentRepository para garantir instância única
 
 ## 🔍 Validações
 - Matrícula única para alunos
 - Email único para alunos
 - Código único para disciplinas
-- Nome único para disciplinas
 - Campos obrigatórios não podem estar vazios
+- Confirmação para exclusões
 
 ## 🤝 Contribuindo
 1. Faça um fork do projeto
