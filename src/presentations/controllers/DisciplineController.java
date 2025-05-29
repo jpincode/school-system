@@ -3,7 +3,7 @@ package presentations.controllers;
 import business.services.DisciplineService;
 
 public class DisciplineController {
-    private DisciplineService disciplineService = new DisciplineService();
+    private static final DisciplineService disciplineService = new DisciplineService();
 
     public String register(String name, String code, String workload) {
         if(name == null || name.isEmpty()) {
@@ -19,6 +19,23 @@ public class DisciplineController {
         boolean wasCreated = disciplineService.registerDiscipline(name, code, workload);
         if(!wasCreated) return "[ERROR] - Discipline with this code or name already exists.";
         return "Discipline registered successfully.";
+    }
+
+    public String enrollStudent(String code, String studentRegistration) {
+        if(code == null || code.isEmpty()) return "[ERROR] - Discipline code cannot be empty.";
+        if(studentRegistration == null || studentRegistration.isEmpty()) return "[ERROR] - Student registration cannot be empty.";
+        
+        boolean wasEnrolled = disciplineService.enrollStudent(code, studentRegistration);
+        if(!wasEnrolled) return "[ERROR] - Discipline or student does not exist.";
+        return "Student enrolled successfully.";
+    }
+
+    public String unenrollStudent(String code, String studentRegistration) {
+        if(code == null || code.isEmpty()) return "[ERROR] - Discipline code cannot be empty.";
+        if(studentRegistration == null || studentRegistration.isEmpty()) return "[ERROR] - Student registration cannot be empty.";
+        boolean wasUnenrolled = disciplineService.unenrollStudent(code, studentRegistration);
+        if(!wasUnenrolled) return "[ERROR] - Discipline or student does not exist.";
+        return "Student unenrolled successfully.";
     }
 
     public String delete(String code, String confirmation) {

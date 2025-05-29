@@ -3,7 +3,7 @@ package presentations.controllers;
 import business.services.StudentService;
 
 public class StudentController {
-    private StudentService studentService = new StudentService();
+    private static final StudentService studentService = new StudentService();
 
     public String register(String registration, String name, String email, String address) {
         if (registration == null || registration.isEmpty()) {

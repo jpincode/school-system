@@ -4,7 +4,7 @@ import models.entities.Student;
 import models.repositories.StudentRepository;
 
 public class StudentService {
-    private StudentRepository studentRepository = new StudentRepository();
+    private static final StudentRepository studentRepository = StudentRepository.getInstance();
 
     public boolean register(String registration, String name, String email, String address) {
         if (studentRepository.findByRegistration(registration) != null) return false;

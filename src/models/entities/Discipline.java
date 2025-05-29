@@ -1,16 +1,41 @@
 package models.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Discipline {
     private String name, code, workload;
+    private List<Student> students;
 
     public Discipline(String name, String code, String workload) {
         this.name = name;
         this.code = code;
         this.workload = workload;
+        this.students = new ArrayList<>();
     }
 
     public String getName() {
         return name;
+    }
+
+    public void addStudent(Student student) {
+        students.add(student);
+    }
+
+    public void removeStudent(Student student) {
+        students.remove(student);
+    }
+
+    public String infos() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Discipline: ").append(name).append("\n");
+        sb.append("Code: ").append(code).append("\n");
+        sb.append("Workload: ").append(workload).append("\n");
+        sb.append("Students enrolled:\n");
+        for (Student student : students) {
+            sb.append(student.toString()).append("\n");
+        }
+        return sb.toString();
     }
 
     public void setName(String name) {
@@ -33,8 +58,26 @@ public class Discipline {
         this.workload = workload;
     }
 
+    public List<Student> getStudents() {
+        return students;
+    }
+
     @Override
     public String toString() {
-        return "Discipline [name=" + name + ", code=" + code + ", workload=" + workload + "]";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Discipline [name=").append(name)
+          .append(", code=").append(code)
+          .append(", workload=").append(workload)
+          .append("]\n- Students enrolled:\n");
+        
+        if (students.isEmpty()) {
+            sb.append("No students enrolled.\n");
+        } else {
+            for (Student student : students) {
+                sb.append("-- ").append(student.toString()).append("\n");
+            }
+        }
+        
+        return sb.toString();
     }
 }

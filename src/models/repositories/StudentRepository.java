@@ -6,10 +6,18 @@ import java.util.List;
 import models.entities.Student;
 
 public class StudentRepository {
+    private static StudentRepository instance;
     private List<Student> students;
 
-    public StudentRepository() {
+    private StudentRepository() {
         this.students = new ArrayList<>();
+    }
+
+    public static StudentRepository getInstance() {
+        if (instance == null) {
+            instance = new StudentRepository();
+        }
+        return instance;
     }
 
     public void save(Student student) {
