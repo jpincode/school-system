@@ -26,18 +26,6 @@ public class Discipline {
         students.remove(student);
     }
 
-    public String infos() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Discipline: ").append(name).append("\n");
-        sb.append("Code: ").append(code).append("\n");
-        sb.append("Workload: ").append(workload).append("\n");
-        sb.append("Students enrolled:\n");
-        for (Student student : students) {
-            sb.append(student.toString()).append("\n");
-        }
-        return sb.toString();
-    }
-
     public void setName(String name) {
         this.name = name;
     }
