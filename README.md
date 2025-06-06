@@ -18,6 +18,7 @@ src/
 │   │   └── Student.java             # Entidade Aluno
 │   └── repositories/
 │       ├── DisciplineRepository.java # Repositório de Disciplinas
+│       ├── ManagerRepository.java    # Gerenciador de Repositórios (Singleton)
 │       └── StudentRepository.java    # Repositório de Alunos
 └── presentations/
     ├── controllers/
@@ -52,7 +53,7 @@ src/
 - Java 17
 - Padrão MVC
 - Programação Orientada a Objetos
-- Singleton Pattern (StudentRepository)
+- Singleton Pattern (ManagerRepository)
 
 ## ⚙️ Como Executar
 
@@ -127,7 +128,7 @@ O sistema apresenta as seguintes opções:
 
 3. **Modelo** (`models/`)
    - Entities: Classes de domínio
-   - Repositories: Persistência de dados
+   - Repositories: Persistência de dados em memória
 
 ## 👥 Padrões de Projeto Utilizados
 
@@ -139,10 +140,12 @@ O sistema apresenta as seguintes opções:
 ### Repository Pattern
 - Abstração da persistência de dados
 - Implementado em `models/repositories`
-- StudentRepository implementa Singleton Pattern
+- Gerenciado pelo ManagerRepository
 
 ### Singleton Pattern
-- Implementado no StudentRepository para garantir instância única
+- Implementado no ManagerRepository para garantir instância única
+- Centraliza o acesso aos repositórios
+- Garante consistência no acesso aos dados
 
 ## 🔍 Validações
 - Matrícula única para alunos
