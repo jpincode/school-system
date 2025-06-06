@@ -2,30 +2,34 @@ package business.services;
 
 import models.entities.Discipline;
 import models.entities.Student;
+import models.repositories.DisciplineRepository;
 import models.repositories.ManagerRepository;
+import models.repositories.StudentRepository;
 
 public class DisciplineService {
     private static final ManagerRepository managerRepository = ManagerRepository.getInstance();
+    private DisciplineRepository disciplineRepository = managerRepository.getDisciplineRepository();
+    private StudentRepository studentRepository = managerRepository.getStudentRepository();
 
     public boolean registerDiscipline(String name, String code, String workload) {
-        if(managerRepository.getDisciplineRepository().findByCode(code) != null) return false;
+        if(disciplineRepository.findByCode(code) != null) return false;
         
         Discipline discipline = new Discipline(name, code, workload);
-        managerRepository.getDisciplineRepository().save(discipline);
+        disciplineRepository.save(discipline);
         return true;
     }
 
     public boolean enrollStudent(String code, String registration) {
-        Discipline discipline = managerRepository.getDisciplineRepository().findByCode(code);
-        Student student = managerRepository.getStudentRepository().findByRegistration(registration);
+        Discipline discipline = disciplineRepository.findByCode(code);
+        Student student = studentRepository.findByRegistration(registration);
 
         discipline.addStudent(student);
         return true;
     }
 
     public boolean unenrollStudent(String code, String registration) {
-        Discipline discipline = managerRepository.getDisciplineRepository().findByCode(code);
-        Student student = managerRepository.getStudentRepository().findByRegistration(registration);
+        Discipline discipline = disciplineRepository.findByCode(code);
+        Student student = studentRepository.findByRegistration(registration);
         if (discipline == null || student == null) return false;
 
         discipline.removeStudent(student);
@@ -33,24 +37,24 @@ public class DisciplineService {
     }
 
     public boolean delete(String code) {
-        Discipline discipline = managerRepository.getDisciplineRepository().findByCode(code);
+        Discipline discipline = disciplineRepository.findByCode(code);
         if (discipline == null) return false;
 
-        managerRepository.getDisciplineRepository().delete(discipline);
+        disciplineRepository.delete(discipline);
         return true;
     }
 
     public boolean update(String name, String code, String workload) {
-        Discipline discipline = managerRepository.getDisciplineRepository().findByCode(code);
+        Discipline discipline = disciplineRepository.findByCode(code);
         if (discipline == null) return false;
 
         if (!name.isBlank() && !name.equals(discipline.getName())) discipline.setName(name);
         if (!workload.isBlank() && !workload.equals(discipline.getWorkload())) discipline.setWorkload(workload);
-        managerRepository.getDisciplineRepository().update(discipline);
+        disciplineRepository.update(discipline);
         return true;
     }
 
     public String findAll() {
-        return managerRepository.getDisciplineRepository().findAll();
+        return disciplineRepository.findAll();
     }
 }
