@@ -20,24 +20,6 @@ public class DisciplineService {
     public boolean enrollStudent(String code, String registration) {
         Discipline discipline = disciplineRepository.findByCode(code);
         Student student = studentRepository.findByRegistration(registration);
-        
-        if (discipline == null) {
-            System.out.println("[DEBUG] Disciplina não encontrada: " + code);
-            return false;
-        }
-        
-        if (student == null) {
-            System.out.println("[DEBUG] Aluno não encontrado: " + registration);
-            return false;
-        }
-
-        // Verificar se o aluno já está matriculado
-        for (Student enrolledStudent : discipline.getStudents()) {
-            if (enrolledStudent.getRegistration().equals(registration)) {
-                System.out.println("[DEBUG] Aluno já matriculado na disciplina");
-                return false;
-            }
-        }
 
         discipline.addStudent(student);
         return true;
