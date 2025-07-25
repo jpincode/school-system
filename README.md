@@ -1,59 +1,54 @@
 # Sistema de Gerenciamento Escolar
 
 ## 📝 Descrição
-Sistema desenvolvido em Java para gerenciamento de alunos e disciplinas em uma instituição de ensino. O projeto implementa operações CRUD (Create, Read, Update, Delete) e segue o padrão de arquitetura MVC (Model-View-Controller).
+Sistema desenvolvido em Java para gerenciamento de alunos e disciplinas em uma instituição de ensino. O projeto implementa operações CRUD (Create, Read, Update, Delete) e segue o padrão de arquitetura MVC (Model-View-Controller). Agora, o sistema utiliza DTOs (Data Transfer Objects) para transferência de dados entre camadas e aprimora a separação de responsabilidades.
 
 ## 🏗️ Estrutura do Projeto
 
 ```
 src/
 ├── business/
+│   ├── dto/
+│   │   ├── DisciplineDTO.java        # DTO para disciplina
+│   │   └── StudentDTO.java           # DTO para aluno
 │   └── services/
-│       ├── DisciplineService.java     # Regras de negócio para disciplinas
+│       ├── DisciplineService.java    # Regras de negócio para disciplinas (agora usando DTO)
 │       ├── IOService.java            # Serviço de entrada/saída
-│       └── StudentService.java       # Regras de negócio para alunos
+│       └── StudentService.java       # Regras de negócio para alunos (agora usando DTO)
 ├── models/
 │   ├── entities/
-│   │   ├── Discipline.java          # Entidade Disciplina
-│   │   └── Student.java             # Entidade Aluno
+│   │   ├── Discipline.java           # Entidade Disciplina
+│   │   └── Student.java              # Entidade Aluno
 │   └── repositories/
 │       ├── DisciplineRepository.java # Repositório de Disciplinas
 │       ├── ManagerRepository.java    # Gerenciador de Repositórios (Singleton)
 │       └── StudentRepository.java    # Repositório de Alunos
 └── presentations/
     ├── controllers/
-    │   ├── DisciplineController.java # Controlador de Disciplinas
-    │   └── StudentController.java    # Controlador de Alunos
+    │   ├── DisciplineController.java # Controlador de Disciplinas (agora usando DTO)
+    │   └── StudentController.java    # Controlador de Alunos (agora usando DTO)
     └── views/
-        ├── DeleteView.java          # Interface de exclusão
-        ├── ListView.java            # Interface de listagem
-        ├── Main.java                # Ponto de entrada da aplicação
-        ├── MenuView.java            # Menu principal
-        ├── RegisterView.java        # Interface de cadastro
-        └── UpdateView.java          # Interface de atualização
+        ├── DeleteView.java           # Interface de exclusão
+        ├── ListView.java             # Interface de listagem
+        ├── Main.java                 # Ponto de entrada da aplicação
+        ├── MenuView.java             # Menu principal
+        ├── RegisterView.java         # Interface de cadastro
+        └── UpdateView.java           # Interface de atualização
 ```
 
-## 🚀 Funcionalidades
+## 🚀 Novidades e Melhorias
 
-### Gerenciamento de Alunos
-- Cadastrar novo aluno
-- Atualizar dados do aluno
-- Remover aluno
-- Listar todos os alunos
-
-### Gerenciamento de Disciplinas
-- Cadastrar nova disciplina
-- Atualizar dados da disciplina
-- Remover disciplina
-- Listar todas as disciplinas
-- Matricular aluno em disciplina
-- Desmatricular aluno de disciplina
+- **Uso de DTOs:** Agora, os dados trafegam entre camadas por meio de objetos DTO, melhorando a organização e a manutenção do código.
+- **Controllers e Services atualizados:** Métodos de cadastro e atualização agora recebem DTOs como parâmetro.
+- **Validações aprimoradas:** Validação de campos obrigatórios e unicidade permanece, mas agora centralizada nos DTOs e services.
+- **Código mais modular:** Separação clara entre entidades, DTOs, lógica de negócio, persistência e apresentação.
 
 ## 🛠️ Tecnologias Utilizadas
 - Java 17
 - Padrão MVC
 - Programação Orientada a Objetos
 - Singleton Pattern (ManagerRepository)
+- DTO Pattern
 
 ## ⚙️ Como Executar
 
@@ -65,15 +60,15 @@ src/
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/jpdevv/sistema-gerenciamento-escolar.git
+git clone https://github.com/jpdevv/school-system.git
 ```
 
 2. Abra o projeto no Visual Studio Code:
 ```bash
-code sistema-gerenciamento-escolar
+code school-system
 ```
 
-3. Execute a classe Main:
+3. Compile e execute a classe Main:
 ```bash
 cd src
 javac presentations/views/Main.java
@@ -120,10 +115,11 @@ O sistema apresenta as seguintes opções:
 ### Camadas do Sistema
 1. **Apresentação** (`presentations/`)
    - Views: Interface com usuário dividida em múltiplas views especializadas
-   - Controllers: Validação de entrada e direcionamento
+   - Controllers: Validação de entrada e direcionamento, agora utilizando DTOs
 
 2. **Negócio** (`business/`)
-   - Services: Regras de negócio e lógica da aplicação
+   - DTOs: Objetos de transferência de dados entre camadas
+   - Services: Regras de negócio e lógica da aplicação, agora utilizando DTOs
    - IOService: Gerenciamento de entrada/saída
 
 3. **Modelo** (`models/`)
@@ -135,7 +131,7 @@ O sistema apresenta as seguintes opções:
 ### MVC (Model-View-Controller)
 - **Model**: Entidades e repositórios
 - **View**: Classes especializadas em `presentations/views`
-- **Controller**: Classes em `presentations/controllers`
+- **Controller**: Classes em `presentations/controllers` (agora usando DTOs)
 
 ### Repository Pattern
 - Abstração da persistência de dados
@@ -146,6 +142,9 @@ O sistema apresenta as seguintes opções:
 - Implementado no ManagerRepository para garantir instância única
 - Centraliza o acesso aos repositórios
 - Garante consistência no acesso aos dados
+
+### DTO Pattern
+- Utilizado para transferir dados entre camadas de forma desacoplada
 
 ## 🔍 Validações
 - Matrícula única para alunos
