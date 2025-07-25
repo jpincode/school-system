@@ -1,5 +1,6 @@
 package presentations.controllers;
 
+import business.dto.StudentDTO;
 import business.services.StudentService;
 
 public class StudentController {
@@ -19,7 +20,9 @@ public class StudentController {
             return "[ERROR] - Address cannot be empty.";
         }
 
-        boolean wasCreated = studentService.register(registration, name, email, address);
+        StudentDTO studentDTO = new StudentDTO(registration, name, email, address);
+
+        boolean wasCreated = studentService.register(studentDTO);
         if (!wasCreated) {
             return "[ERROR] - Student with this registration or email already exists.";
         }
@@ -39,7 +42,9 @@ public class StudentController {
     public String update(String registration, String name, String email, String address) {
         if (registration == null || registration.isEmpty()) return "[ERROR] - Registration cannot be empty.";
 
-        boolean wasUpdated = studentService.update(registration, name, email, address);
+        StudentDTO studentDTO = new StudentDTO(registration, name, email, address);
+
+        boolean wasUpdated = studentService.update(studentDTO);
         if (!wasUpdated) return "[ERROR] - Student with this registration does not exist or no changes were made.";
         return "Student updated successfully.";
     }
