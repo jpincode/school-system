@@ -1,5 +1,6 @@
 package presentations.controllers;
 
+import business.dto.DisciplineDTO;
 import business.services.DisciplineService;
 
 public class DisciplineController {
@@ -15,8 +16,11 @@ public class DisciplineController {
         if(workload == null || workload.isEmpty()) {
             return "[ERROR] - Discipline workload cannot be empty.";
         }
+
+        // TODO adicionado DisciplineDTO
+        DisciplineDTO disciplineDTO = new DisciplineDTO(name, code, workload);
         
-        boolean wasCreated = disciplineService.registerDiscipline(name, code, workload);
+        boolean wasCreated = disciplineService.registerDiscipline(disciplineDTO);
         if(!wasCreated) return "[ERROR] - Discipline with this code or name already exists.";
         return "Discipline registered successfully.";
     }
@@ -51,7 +55,10 @@ public class DisciplineController {
     public String update(String name, String code, String workload) {
         if(code == null || code.isEmpty()) return "[ERROR] - Discipline code cannot be empty.";
         
-        boolean wasUpdated = disciplineService.update(name, code, workload);
+        // TODO adicionado DisciplineDTO
+        DisciplineDTO disciplineDTO = new DisciplineDTO(name, code, workload);
+
+        boolean wasUpdated = disciplineService.update(disciplineDTO);
         if(!wasUpdated) return "[ERROR] - Discipline with this code does not exist.";
         return "Discipline updated successfully.";
     }

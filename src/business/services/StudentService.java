@@ -1,5 +1,6 @@
 package business.services;
 
+import business.dto.StudentDTO;
 import models.entities.Student;
 import models.repositories.ManagerRepository;
 import models.repositories.StudentRepository;
@@ -8,11 +9,12 @@ public class StudentService {
     private static final ManagerRepository managerRepository = ManagerRepository.getInstance();
     private StudentRepository studentRepository = managerRepository.getStudentRepository();
 
-    public boolean register(String registration, String name, String email, String address) {
-        if (studentRepository.findByRegistration(registration) != null) return false;
-        if (studentRepository.findByEmail(email) != null) return false;
+    // TODO foi adicionado StudentDTO e os parâmetros do método foram alterados
+    public boolean register(StudentDTO studentDTO) {
+        if (studentRepository.findByRegistration(studentDTO.getRegistration()) != null) return false;
+        if (studentRepository.findByEmail(studentDTO.getEmail()) != null) return false;
 
-        Student student = new Student(registration, name, email, address);
+        Student student = new Student(studentDTO.getRegistration(), studentDTO.getName(), studentDTO.getEmail(), studentDTO.getAddress());
 
         studentRepository.save(student);
         return true;
@@ -26,13 +28,14 @@ public class StudentService {
         return true;
     }
 
-    public boolean update(String registration, String name, String email, String address) {
-        Student student = studentRepository.findByRegistration(registration);
+    // TODO foi adicionado StudentDTO e os parâmetros do método foram alterados
+    public boolean update(StudentDTO studentDTO) {
+        Student student = studentRepository.findByRegistration(studentDTO.getRegistration());
         if (student == null) return false;
 
-        if (!name.isBlank() && name != student.getName()) student.setName(name);
-        if (!email.isBlank() && email != student.getEmail()) student.setEmail(email);
-        if (!address.isBlank() && address != student.getAddress()) student.setAddress(address);
+        if (!studentDTO.getName().isBlank() && studentDTO.getName() != student.getName()) student.setName(studentDTO.getName());
+        if (!studentDTO.getEmail().isBlank() && studentDTO.getEmail() != student.getEmail()) student.setEmail(studentDTO.getEmail());
+        if (!studentDTO.getAddress().isBlank() && studentDTO.getAddress() != student.getAddress()) student.setAddress(studentDTO.getAddress());
 
         studentRepository.update(student);
         return true;
