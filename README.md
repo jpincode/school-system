@@ -1,132 +1,132 @@
-# Sistema de Gerenciamento Escolar
+# School Management System
 
-## 📝 Descrição
-Sistema desenvolvido em Java para gerenciamento de alunos e disciplinas em uma instituição de ensino. O projeto implementa operações CRUD (Create, Read, Update, Delete) e segue o padrão de arquitetura MVC (Model-View-Controller). Agora, o sistema utiliza DTOs (Data Transfer Objects) para transferência de dados entre camadas e aprimora a separação de responsabilidades.
+## 📝 Description
+System developed in Java for managing students and subjects in an educational institution. The project implements CRUD operations (Create, Read, Update, Delete) and follows the MVC (Model-View-Controller) architecture pattern. The system now uses DTOs (Data Transfer Objects) for data transfer between layers, enhancing separation of concerns.
 
-## 🏗️ Estrutura do Projeto
+## 🏗️ Project Structure
 
 ```
 src/
 ├── business/
 │   ├── dto/
-│   │   ├── DisciplineDTO.java        # DTO para disciplina
-│   │   └── StudentDTO.java           # DTO para aluno
+│   │   ├── DisciplineDTO.java        # DTO for subject
+│   │   └── StudentDTO.java           # DTO for student
 │   └── services/
-│       ├── DisciplineService.java    # Regras de negócio para disciplinas (agora usando DTO)
-│       ├── IOService.java            # Serviço de entrada/saída
-│       └── StudentService.java       # Regras de negócio para alunos (agora usando DTO)
+│       ├── DisciplineService.java    # Business rules for subjects (now using DTO)
+│       ├── IOService.java            # Input/output service
+│       └── StudentService.java       # Business rules for students (now using DTO)
 ├── models/
 │   ├── entities/
-│   │   ├── Discipline.java           # Entidade Disciplina
-│   │   └── Student.java              # Entidade Aluno
+│   │   ├── Discipline.java           # Subject entity
+│   │   └── Student.java              # Student entity
 │   └── repositories/
-│       ├── DisciplineRepository.java # Repositório de Disciplinas
-│       ├── ManagerRepository.java    # Gerenciador de Repositórios (Singleton)
-│       └── StudentRepository.java    # Repositório de Alunos
+│       ├── DisciplineRepository.java # Subject repository
+│       ├── ManagerRepository.java    # Repository manager (Singleton)
+│       └── StudentRepository.java    # Student repository
 └── presentations/
     ├── controllers/
-    │   ├── DisciplineController.java # Controlador de Disciplinas (agora usando DTO)
-    │   └── StudentController.java    # Controlador de Alunos (agora usando DTO)
+    │   ├── DisciplineController.java # Subject controller (now using DTO)
+    │   └── StudentController.java    # Student controller (now using DTO)
     └── views/
-        ├── DeleteView.java           # Interface de exclusão
-        ├── ListView.java             # Interface de listagem
-        ├── Main.java                 # Ponto de entrada da aplicação
-        ├── MenuView.java             # Menu principal
-        ├── RegisterView.java         # Interface de cadastro
-        └── UpdateView.java           # Interface de atualização
+        ├── DeleteView.java           # Delete interface
+        ├── ListView.java             # Listing interface
+        ├── Main.java                 # Application entry point
+        ├── MenuView.java             # Main menu
+        ├── RegisterView.java         # Registration interface
+        └── UpdateView.java           # Update interface
 ```
 
-## 🚀 Novidades e Melhorias
+## 🚀 New Features and Improvements
 
-- **Uso de DTOs:** Agora, os dados trafegam entre camadas por meio de objetos DTO, melhorando a organização e a manutenção do código.
-- **Controllers e Services atualizados:** Métodos de cadastro e atualização agora recebem DTOs como parâmetro.
-- **Validações aprimoradas:** Validação de campos obrigatórios e unicidade permanece, mas agora centralizada nos DTOs e services.
-- **Código mais modular:** Separação clara entre entidades, DTOs, lógica de negócio, persistência e apresentação.
+- **Use of DTOs:** Data now flows between layers through DTO objects, improving code organization and maintainability.
+- **Updated Controllers and Services:** Registration and update methods now receive DTOs as parameters.
+- **Enhanced Validations:** Required fields and uniqueness validation remain, but are now centralized in DTOs and services.
+- **More Modular Code:** Clear separation between entities, DTOs, business logic, persistence, and presentation.
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Technologies Used
 - Java 17
-- Padrão MVC
-- Programação Orientada a Objetos
+- MVC Pattern
+- Object-Oriented Programming
 - Singleton Pattern (ManagerRepository)
 - DTO Pattern
 
-## ⚙️ Como Executar
+## ⚙️ How to Run
 
-### Pré-requisitos
-- Java Development Kit (JDK) 17 ou superior
-- Visual Studio Code com extensão "Extension Pack for Java"
+### Prerequisites
+- Java Development Kit (JDK) 17 or higher
+- Visual Studio Code with "Extension Pack for Java"
 
-### Passos para Execução
+### Steps to Run
 
-1. Clone o repositório:
+1. Clone the repository:
 ```bash
 git clone https://github.com/jpdevv/school-system.git
 ```
 
-2. Abra o projeto no Visual Studio Code:
+2. Open the project in Visual Studio Code:
 ```bash
 code school-system
 ```
 
-3. Compile e execute a classe Main:
+3. Compile and run the Main class:
 ```bash
 cd src
 javac presentations/views/Main.java
 java presentations.views.Main
 ```
 
-## 📱 Como Usar
+## 📱 How to Use
 
-### Menu Principal
-O sistema apresenta as seguintes opções:
-1. Cadastrar Disciplina
-2. Cadastrar Aluno
-3. Matricular Aluno na Disciplina
-4. Excluir Disciplina
-5. Excluir Aluno
-6. Desmatricular Aluno da Disciplina
-7. Atualizar Disciplina
-8. Atualizar Aluno
-9. Listar
-0. Sair
+### Main Menu
+The system presents the following options:
+1. Register Subject
+2. Register Student
+3. Enroll Student in Subject
+4. Delete Subject
+5. Delete Student
+6. Unenroll Student from Subject
+7. Update Subject
+8. Update Student
+9. List
+0. Exit
 
-### Menu de Listagem
-1. Listar Disciplinas
-2. Listar Alunos
-0. Voltar ao Menu Principal
+### Listing Menu
+1. List Subjects
+2. List Students
+0. Return to Main Menu
 
-### Operações Principais
+### Main Operations
 
-#### Cadastro de Aluno
-- Informações necessárias:
-  - Matrícula (único)
-  - Nome
-  - Email (único)
-  - Endereço
+#### Student Registration
+- Required information:
+  - Registration number (unique)
+  - Name
+  - Email (unique)
+  - Address
 
-#### Cadastro de Disciplina
-- Informações necessárias:
-  - Nome
-  - Código (único)
-  - Carga horária
+#### Subject Registration
+- Required information:
+  - Name
+  - Code (unique)
+  - Workload
 
-## 🏗️ Arquitetura
+## 🏗️ Architecture
 
-### Camadas do Sistema
-1. **Apresentação** (`presentations/`)
-   - Views: Interface com usuário dividida em múltiplas views especializadas
-   - Controllers: Validação de entrada e direcionamento, agora utilizando DTOs
+### System Layers
+1. **Presentation** (`presentations/`)
+   - Views: User interface divided into multiple specialized views
+   - Controllers: Input validation and routing, now using DTOs
 
-2. **Negócio** (`business/`)
-   - DTOs: Objetos de transferência de dados entre camadas
-   - Services: Regras de negócio e lógica da aplicação, agora utilizando DTOs
-   - IOService: Gerenciamento de entrada/saída
+2. **Business** (`business/`)
+   - DTOs: Data transfer objects between layers
+   - Services: Business rules and application logic, now using DTOs
+   - IOService: Input/output management
 
-3. **Modelo** (`models/`)
-   - Entities: Classes de domínio
-   - Repositories: Persistência de dados em memória
+3. **Model** (`models/`)
+   - Entities: Domain classes
+   - Repositories: In-memory data persistence
 
-## 👥 Padrões de Projeto Utilizados
+## 👥 Design Patterns Used
 
 ### MVC (Model-View-Controller)
 - **Model**: Entidades e repositórios
@@ -134,36 +134,36 @@ O sistema apresenta as seguintes opções:
 - **Controller**: Classes em `presentations/controllers` (agora usando DTOs)
 
 ### Repository Pattern
-- Abstração da persistência de dados
-- Implementado em `models/repositories`
-- Gerenciado pelo ManagerRepository
+- Data persistence abstraction
+- Implemented in `models/repositories`
+- Managed by ManagerRepository
 
 ### Singleton Pattern
-- Implementado no ManagerRepository para garantir instância única
-- Centraliza o acesso aos repositórios
-- Garante consistência no acesso aos dados
+- Implemented in ManagerRepository to ensure a single instance
+- Centralizes repository access
+- Ensures data consistency
 
 ### DTO Pattern
-- Utilizado para transferir dados entre camadas de forma desacoplada
+- Used to transfer data between layers in a decoupled way
 
-## 🔍 Validações
-- Matrícula única para alunos
-- Email único para alunos
-- Código único para disciplinas
-- Campos obrigatórios não podem estar vazios
-- Confirmação para exclusões
+## 🔍 Validations
+- Unique registration number for students
+- Unique email for students
+- Unique code for subjects
+- Required fields cannot be empty
+- Confirmation for deletions
 
-## 🤝 Contribuindo
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
-3. Commit suas mudanças (`git commit -m 'Adiciona nova feature'`)
-4. Push para a branch (`git push origin feature/nova-feature`)
-5. Abra um Pull Request
+## 🤝 Contributing
+1. Fork the project
+2. Create a branch for your feature (`git checkout -b feature/new-feature`)
+3. Commit your changes (`git commit -m 'Add new feature'`)
+4. Push to the branch (`git push origin feature/new-feature`)
+5. Open a Pull Request
 
-## 📄 Licença
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+## 📄 License
+This project is under the MIT license. See the [LICENSE](LICENSE) file for more details.
 
-## 📫 Contato
+## 📫 Contact
 - Email: joaoaraujo.developer@gmail.com
 - LinkedIn: [João Paulo](https://www.linkedin.com/in/joaodevv/)
 - GitHub: [jpdevv](https://github.com/jpdevv)
