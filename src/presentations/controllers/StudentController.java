@@ -20,7 +20,6 @@ public class StudentController {
             return "[ERROR] - Address cannot be empty.";
         }
 
-        // TODO adicionado StudentDTO
         StudentDTO studentDTO = new StudentDTO(registration, name, email, address);
 
         boolean wasCreated = studentService.register(studentDTO);
@@ -43,7 +42,6 @@ public class StudentController {
     public String update(String registration, String name, String email, String address) {
         if (registration == null || registration.isEmpty()) return "[ERROR] - Registration cannot be empty.";
 
-        // TODO adicionado StudentDTO
         StudentDTO studentDTO = new StudentDTO(registration, name, email, address);
 
         boolean wasUpdated = studentService.update(studentDTO);

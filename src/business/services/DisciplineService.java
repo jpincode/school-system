@@ -12,7 +12,6 @@ public class DisciplineService {
     private DisciplineRepository disciplineRepository = managerRepository.getDisciplineRepository();
     private StudentRepository studentRepository = managerRepository.getStudentRepository();
 
-    // TODO foi adicionado DisiciplineDTO e os parâmetros do método foram alterados
     public boolean registerDiscipline(DisciplineDTO disciplineDTO) {
         if(disciplineRepository.findByCode(disciplineDTO.getCode()) != null) return false;
         
@@ -46,7 +45,6 @@ public class DisciplineService {
         return true;
     }
 
-    // TODO foi adicionado DisiciplineDTO e os parâmetros do método foram alterados
     public boolean update(DisciplineDTO disciplineDTO) {
         Discipline discipline = disciplineRepository.findByCode(disciplineDTO.getCode());
         if (discipline == null) return false;

@@ -17,7 +17,6 @@ public class DisciplineController {
             return "[ERROR] - Discipline workload cannot be empty.";
         }
 
-        // TODO adicionado DisciplineDTO
         DisciplineDTO disciplineDTO = new DisciplineDTO(name, code, workload);
         
         boolean wasCreated = disciplineService.registerDiscipline(disciplineDTO);
@@ -55,7 +54,6 @@ public class DisciplineController {
     public String update(String name, String code, String workload) {
         if(code == null || code.isEmpty()) return "[ERROR] - Discipline code cannot be empty.";
         
-        // TODO adicionado DisciplineDTO
         DisciplineDTO disciplineDTO = new DisciplineDTO(name, code, workload);
 
         boolean wasUpdated = disciplineService.update(disciplineDTO);

@@ -9,7 +9,6 @@ public class StudentService {
     private static final ManagerRepository managerRepository = ManagerRepository.getInstance();
     private StudentRepository studentRepository = managerRepository.getStudentRepository();
 
-    // TODO foi adicionado StudentDTO e os parâmetros do método foram alterados
     public boolean register(StudentDTO studentDTO) {
         if (studentRepository.findByRegistration(studentDTO.getRegistration()) != null) return false;
         if (studentRepository.findByEmail(studentDTO.getEmail()) != null) return false;
@@ -28,7 +27,6 @@ public class StudentService {
         return true;
     }
 
-    // TODO foi adicionado StudentDTO e os parâmetros do método foram alterados
     public boolean update(StudentDTO studentDTO) {
         Student student = studentRepository.findByRegistration(studentDTO.getRegistration());
         if (student == null) return false;
