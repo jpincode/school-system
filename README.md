@@ -166,4 +166,4 @@ This project is under the MIT license. See the [LICENSE](LICENSE) file for more 
 ## 📫 Contact
 - Email: joaoaraujo.developer@gmail.com
 - LinkedIn: [João Paulo](https://www.linkedin.com/in/joaodevv/)
-- GitHub: [jpdevv](https://github.com/jpdevv)
+- GitHub: [jpincode](https://github.com/jpincode)
